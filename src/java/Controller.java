@@ -189,6 +189,7 @@ public class Controller extends HttpServlet {
                         out.print("</tbody>");
                         out.print("</table>");
                     }
+                    break;
                 case "create_new_rule":
                     out.print(db.create_new_rule(req.getParameter("min_age_to_participant_VSI"), req.getParameter("company_CSI_percentage"), req.getParameter("labor_CSI_percentage"), req.getParameter("labor_VSI_percentage"), req.getParameter("1st_area_min_salary"), req.getParameter("2nd_area_min_salary"), req.getParameter("3rd_area_min_salary"), req.getParameter("4th_area_min_salary")));
                     break;
