@@ -2,6 +2,7 @@
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -212,13 +213,20 @@ public class Database {
         return result;
     }
 
-    public Object load_rule() {
-        Object result = null;
+    public JSONObject load_rule() {
+        JSONObject result = new JSONObject();
         try {
             CallableStatement stmt = conn.prepareCall("call load_rule();");
             ResultSet rs = stmt.executeQuery();
             if(rs.next()){
-                result = rs.next();
+                result.put("min_age_to_participant_VSI", rs.getString("min_age_to_participant_VSI"));
+                result.put("company_CSI_percentage", rs.getString("company_CSI_percentage"));
+                result.put("labor_CSI_percentage", rs.getString("labor_CSI_percentage"));
+                result.put("labor_VSI_percentage", rs.getString("labor_VSI_percentage"));
+                result.put("1st_area_min_salary", rs.getString("1st_area_min_salary"));
+                result.put("2nd_area_min_salary", rs.getString("2nd_area_min_salary"));
+                result.put("3rd_area_min_salary", rs.getString("3rd_area_min_salary"));
+                result.put("4th_area_min_salary", rs.getString("4th_area_min_salary"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);

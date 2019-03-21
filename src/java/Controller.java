@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
-
+import org.json.*;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -110,11 +110,11 @@ public class Controller extends HttpServlet {
                         out.print("</tr>");
                         out.print("</tbody>");
                         out.print("</table>");
-                    } else if (req.getParameter("type").equals("compulsory")){
+                    } else if (req.getParameter("type").equals("compulsory")) {
                         out.println("compulsory");
                         String total_company = (String) db.get_total_company(req.getParameter("from_date"), req.getParameter("to_date"));
                         String total_compulsory_paid_money = (String) db.get_total_compulsory_paid_money(req.getParameter("from_date"), req.getParameter("to_date"));
-                        String total_paid_company =  String.valueOf(db.get_total_paid_company(req.getParameter("from_date"), req.getParameter("to_date")));
+                        String total_paid_company = String.valueOf(db.get_total_paid_company(req.getParameter("from_date"), req.getParameter("to_date")));
                         String total_unpaid_company = String.valueOf(db.get_total_unpaid_company(req.getParameter("from_date"), req.getParameter("to_date")));
                         String total_compulsory_customer = (String) db.get_total_compulsory_customer(req.getParameter("from_date"), req.getParameter("to_date"));
                         out.print("<table>");
@@ -188,6 +188,46 @@ public class Controller extends HttpServlet {
                         out.print("</tbody>");
                         out.print("</table>");
                     }
+                case "create_new_rule":
+                    out.print(db.create_new_rule(req.getParameter("min_age_to_participant_VSI"), req.getParameter("company_CSI_percentage"), req.getParameter("labor_CSI_percentage"), req.getParameter("labor_VSI_percentage"), req.getParameter("1st_area_min_salary"), req.getParameter("2nd_area_min_salary"), req.getParameter("3rd_area_min_salary"), req.getParameter("4th_area_min_salary")));
+                    break;
+                case "load_rule":
+                    JSONObject j = db.load_rule();
+                    out.print(j.toString());
+                    break;
+                case "xuatbaocao_person":
+                    Object result = db.report_person(req.getParameter("customer_code"), req.getParameter("from_date"), req.getParameter("to_date"));
+                    out.print("<table>");
+                    out.print("<thead>");
+                    out.print("<th>STT</th>");
+                    out.print("<th>Mã BHXH</th>");
+                    out.print("<th>Tên khách hàng</th>");
+                    out.print("<th>Giới tính</th>");
+                    out.print("<th>Loại bảo hiểm</th>");
+                    out.print("<th>Pay date</th>");
+                    out.print("<th>Số tiền</th>");
+                    out.print("</thead>");
+                    out.print("<tbody>");
+                    foreach($result as $key =  > $value
+                     
+                     
+                        ) {
+							out.print("<tr>");
+                        out.print("<td>") . ($key + 1) . "</td>");
+								out.print("<td>").$value['customer_code'] . "</td>");
+								out.print("<td>").$value['full_name'] . "</td>");
+								out.print("<td>").$value['gender'] . "</td>");
+								out.print("<td>").$value['type_of_insurance'
+                        ] . "</td>");
+								out.print("<td>").date('m/Y'
+                        , strtotime($value['pay_date'])) . "</td>");
+								out.print("<td>").$value['money'
+                        ] . "</td>");
+							out.print("</tr>");
+                    }
+                    out.print("</tbody>");
+                    out.print("</table>");
+                    break;
                     break;
                 default:
                     out.println("UNKNOWN INPUT COMMAND -> " + cmd);
