@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 import org.json.*;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -196,7 +197,7 @@ public class Controller extends HttpServlet {
                     out.print(j.toString());
                     break;
                 case "xuatbaocao_person":
-                    Object result = db.report_person(req.getParameter("customer_code"), req.getParameter("from_date"), req.getParameter("to_date"));
+                    JSONArray result = db.report_person(req.getParameter("customer_code"), req.getParameter("from_date"), req.getParameter("to_date"));
                     out.print("<table>");
                     out.print("<thead>");
                     out.print("<th>STT</th>");
@@ -208,26 +209,19 @@ public class Controller extends HttpServlet {
                     out.print("<th>Số tiền</th>");
                     out.print("</thead>");
                     out.print("<tbody>");
-                    foreach($result as $key =  > $value
-                     
-                     
-                        ) {
-							out.print("<tr>");
-                        out.print("<td>") . ($key + 1) . "</td>");
-								out.print("<td>").$value['customer_code'] . "</td>");
-								out.print("<td>").$value['full_name'] . "</td>");
-								out.print("<td>").$value['gender'] . "</td>");
-								out.print("<td>").$value['type_of_insurance'
-                        ] . "</td>");
-								out.print("<td>").date('m/Y'
-                        , strtotime($value['pay_date'])) . "</td>");
-								out.print("<td>").$value['money'
-                        ] . "</td>");
-							out.print("</tr>");
+                    for (int i = 0; i < result.length(); i++) {
+			out.print("<tr>");
+                        out.print("<td>" + (i + 1) + "</td>");
+			out.print("<td>" + result.getJSONObject(i).getString("customer_code") + "</td>");
+			out.print("<td>" + result.getJSONObject(i).getString("full_name") + "</td>");
+			out.print("<td>" + result.getJSONObject(i).getString("gender") + "</td>");
+			out.print("<td>" + result.getJSONObject(i).getString("type_of_insurance") + "</td>");
+			out.print("<td>" + result.getJSONObject(i).getString("pay_date") + "</td>");
+			out.print("<td>" + result.getJSONObject(i).getString("money") + "</td>");
+                        out.print("</tr>");
                     }
                     out.print("</tbody>");
                     out.print("</table>");
-                    break;
                     break;
                 default:
                     out.println("UNKNOWN INPUT COMMAND -> " + cmd);

@@ -296,8 +296,8 @@ public class Database {
         return result;
     }
 
-    public Object report_person(String customer_code, String from_date, String to_date) {
-        int result = 0;
+    public JSONArray report_person(String customer_code, String from_date, String to_date) {
+        JSONArray result = new JSONArray();
         try {
             CallableStatement stmt = conn.prepareCall("call get_insurance_by_customer_code(?,?,?)");
             stmt.setString(1, customer_code);
@@ -305,7 +305,14 @@ public class Database {
             stmt.setString(3, to_date);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
-                result++;
+                JSONObject j = new JSONObject();
+                j.put("customer_code", rs.getString("customer_code"));
+                j.put("full_name", rs.getString("full_name"));
+                j.put("gender", rs.getString("gender"));
+                j.put("pay_date", rs.getString("pay_date"));
+                j.put("money", rs.getString("money"));
+                j.put("type_of_insurance", rs.getString("type_of_insurance"));
+                result.put(j);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);

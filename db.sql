@@ -233,7 +233,7 @@ CREATE TABLE `rule` (
   `is_deleted` int(11) DEFAULT '0',
   `created_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`rid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,7 +242,7 @@ CREATE TABLE `rule` (
 
 LOCK TABLES `rule` WRITE;
 /*!40000 ALTER TABLE `rule` DISABLE KEYS */;
-INSERT INTO `rule` VALUES (1,15,17,10,8,4700000,4500000,4100000,3700000,0,'2019-03-15 20:39:01'),(2,16,17,10,8,4700000,4500000,4100000,3700000,0,'2019-03-21 09:05:48');
+INSERT INTO `rule` VALUES (1,15,17,10,8,4700000,4500000,4100000,3700000,0,'2019-03-15 20:39:01'),(2,16,17,10,8,4700000,4500000,4100000,3700000,0,'2019-03-21 09:05:48'),(3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2019-03-21 09:23:48'),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2019-03-21 09:23:48'),(5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2019-03-21 09:24:05'),(6,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2019-03-21 09:24:05'),(7,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2019-03-21 09:28:43'),(8,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2019-03-21 09:28:43');
 /*!40000 ALTER TABLE `rule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -443,7 +443,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_insurance_by_customer_code`(in _customer_code varchar(50), in _from_date varchar(50), in _to_date varchar(50))
 BEGIN
-	select c.code as customer_code, c.full_name as full_name, c.gender as gender, i.pay_date as pay_date, i.money as money, i.type_of_insurance as type_of_insurance
+	select c.code as customer_code, c.full_name as full_name, c.gender as gender, date_format(i.pay_date, '%m/%Y') as pay_date, i.money as money, i.type_of_insurance as type_of_insurance
     from insurance as i inner join customer as c on i.customer_code = c.code
     where `customer_code` = _customer_code and str_to_date(concat('01/', _from_date), '%d/%m/%Y') <= pay_date and pay_date <= str_to_date(concat('01/', _to_date), '%d/%m/%Y');
 END ;;
@@ -744,4 +744,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-21 16:06:10
+-- Dump completed on 2019-03-21 16:29:00
