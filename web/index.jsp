@@ -84,6 +84,7 @@
                     <!-- <input type="text" name="from_date" id = "from_date_theodoidanhsach">
                     <input type="text" name="to_date" id = "to_date_theodoidanhsach"> -->
                     Từ <select id="from_date_month_theodoidanhsach">
+                        <option value="...">...</option>
                         <option value="01">1</option>
                         <option value="02">2</option>
                         <option value="03">3</option>
@@ -98,7 +99,7 @@
                         <option value="12">12</option>
                     </select>
                     <select id="from_date_year_theodoidanhsach">
-                        <option value="2020">2020</option>
+                        <option value="...">...</option>
                         <option value="2019">2019</option>
                         <option value="2018">2018</option>
                         <option value="2017">2017</option>
@@ -108,6 +109,7 @@
                     <br>
                     đến 
                     <select id="to_date_month_theodoidanhsach">
+                        <option value="...">...</option>
                         <option value="01">1</option>
                         <option value="02">2</option>
                         <option value="03">3</option>
@@ -122,7 +124,7 @@
                         <option value="12">12</option>
                     </select>
                     <select id="to_date_year_theodoidanhsach">
-                        <option value="2020">2020</option>
+                        <option value="...">...</option>
                         <option value="2019">2019</option>
                         <option value="2018">2018</option>
                         <option value="2017">2017</option>
@@ -145,6 +147,7 @@
                 <div class="modal-body">
                     Mã khách hàng: <input type="text" name="customer_code" id="customer_code_xuatbaocao"><br>
                     Từ <select id="from_date_month_xuatbaocao">
+                        <option value="...">...</option>
                         <option value="01">1</option>
                         <option value="02">2</option>
                         <option value="03">3</option>
@@ -159,7 +162,7 @@
                         <option value="12">12</option>
                     </select>
                     <select id="from_date_year_xuatbaocao">
-                        <option value="2020">2020</option>
+                        <option value="...">...</option>
                         <option value="2019">2019</option>
                         <option value="2018">2018</option>
                         <option value="2017">2017</option>
@@ -169,6 +172,7 @@
                     <br>
                     đến 
                     <select id="to_date_month_xuatbaocao">
+                        <option value="...">...</option>
                         <option value="01">1</option>
                         <option value="02">2</option>
                         <option value="03">3</option>
@@ -183,7 +187,7 @@
                         <option value="12">12</option>
                     </select>
                     <select id="to_date_year_xuatbaocao">
-                        <option value="2020">2020</option>
+                        <option value="...">...</option>
                         <option value="2019">2019</option>
                         <option value="2018">2018</option>
                         <option value="2017">2017</option>

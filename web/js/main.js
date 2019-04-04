@@ -1,5 +1,9 @@
 $(document).on("click", "#submit_btn_theodoidanhsach", function () {
     console.log("button submit clicked");
+    if($("#from_date_month_theodoidanhsach").val() == "..." || $("#from_date_year_theodoidanhsach").val() == "..." || $("#to_date_month_theodoidanhsach").val() == "..." || $("#to_date_year_theodoidanhsach").val() == "..."){
+        alert("Ngày tháng không hợp lệ!");
+        return;
+    }
     var payload_voluntary = {'command': 'system_report', 'type': 'voluntary', 'from_date': $("#from_date_month_theodoidanhsach").val() + "/" + $("#from_date_year_theodoidanhsach").val(), 'to_date': $("#to_date_month_theodoidanhsach").val() + "/" + $("#to_date_year_theodoidanhsach").val()};
     var payload_compulsory = {'command': 'system_report', 'type': 'compulsory', 'from_date': $("#from_date_month_theodoidanhsach").val() + "/" + $("#from_date_year_theodoidanhsach").val(), 'to_date': $("#to_date_month_theodoidanhsach").val() + "/" + $("#to_date_year_theodoidanhsach").val()};
     console.log(payload_voluntary)
@@ -10,7 +14,19 @@ $(document).on("click", "#submit_btn_theodoidanhsach", function () {
     $('#result_theodoidanhsach').show();
 });
 $(document).on("click", "#submit_btn_xuatbaocao", function () {
-    var payload_person = {'command': 'xuatbaocao_person', 'customer_code': $('#customer_code_xuatbaocao').val(), 'from_date': $("#from_date_month_xuatbaocao").val() + "/" + $("#from_date_year_xuatbaocao").val(), 'to_date': $("#to_date_month_xuatbaocao").val() + "/" + $("#to_date_year_xuatbaocao").val()}
+    var customer_code = $('#customer_code_xuatbaocao').val();
+    var customer_code_pattern = new RegExp("^[a-zA-Z]{2}[0-9]{4}$");
+    var res = customer_code_pattern.test(customer_code);
+    console.log(res);
+    if( res == false) {
+        alert("Mã khách hàng không hợp lệ!");
+        return;
+    }
+    if($("#from_date_month_xuatbaocao").val() == "..." || $("#from_date_year_xuatbaocao").val() == "..." || $("#to_date_month_xuatbaocao").val() == "..." || $("#to_date_year_xuatbaocao").val() == "..."){
+        alert("Ngày tháng không hợp lệ!");
+        return;
+    }
+    var payload_person = {'command': 'xuatbaocao_person', 'customer_code': customer_code, 'from_date': $("#from_date_month_xuatbaocao").val() + "/" + $("#from_date_year_xuatbaocao").val(), 'to_date': $("#to_date_month_xuatbaocao").val() + "/" + $("#to_date_year_xuatbaocao").val()}
     console.log(payload_person)
     $('#xuatbaocao_person').load('Controller', payload_person)
     $('#result_xuatbaocao').show()

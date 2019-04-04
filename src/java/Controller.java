@@ -41,6 +41,10 @@ public class Controller extends HttpServlet {
                         String total_voluntary_unpaid_money = (String) db.get_total_voluntary_unpaid_money(req.getParameter("from_date"), req.getParameter("to_date"));
                         String total_voluntary_customer = (String) db.get_total_voluntary_customer(req.getParameter("from_date"), req.getParameter("to_date"));
                         System.out.println("get all data done");
+                        if(total_voluntary_customer_paid == null || total_voluntary_customer_unpaid == null || total_voluntary_paid_money == null || total_voluntary_unpaid_money == null || total_voluntary_customer == null){
+                            out.print("<h3 style='color:red'>Không có dữ liệu nào</h3>");
+                            break;
+                        }
                         out.print("<table>");
                         out.print("<thead>");
                         out.print("<th>");
@@ -112,12 +116,15 @@ public class Controller extends HttpServlet {
                         out.print("</tbody>");
                         out.print("</table>");
                     } else if (req.getParameter("type").equals("compulsory")) {
-                        out.println("compulsory");
                         String total_company = (String) db.get_total_company(req.getParameter("from_date"), req.getParameter("to_date"));
                         String total_compulsory_paid_money = (String) db.get_total_compulsory_paid_money(req.getParameter("from_date"), req.getParameter("to_date"));
                         String total_paid_company = String.valueOf(db.get_total_paid_company(req.getParameter("from_date"), req.getParameter("to_date")));
                         String total_unpaid_company = String.valueOf(db.get_total_unpaid_company(req.getParameter("from_date"), req.getParameter("to_date")));
                         String total_compulsory_customer = (String) db.get_total_compulsory_customer(req.getParameter("from_date"), req.getParameter("to_date"));
+                        if(total_company == null || total_compulsory_paid_money == null || total_paid_company == null || total_unpaid_company == null || total_compulsory_customer == null){
+                            out.print("<h3 style='color:red'>Không có dữ liệu nào</h3>");
+                            break;
+                        }
                         out.print("<table>");
                         out.print("<thead>");
                         out.print("<th>");
@@ -199,6 +206,10 @@ public class Controller extends HttpServlet {
                     break;
                 case "xuatbaocao_person":
                     JSONArray result = db.report_person(req.getParameter("customer_code"), req.getParameter("from_date"), req.getParameter("to_date"));
+                    if(result.length() == 0){
+                        out.print("<h4 style='color:red;'>Không có dữ liệu nào với mã khách hàng -> [" + req.getParameter("customer_code") + "] trong khoảng thời gian từ " + req.getParameter("from_date") + " đến " + req.getParameter("to_date") + "</h4>");
+                        break;
+                    }
                     out.print("<table>");
                     out.print("<thead>");
                     out.print("<th>STT</th>");
