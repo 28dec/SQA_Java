@@ -24,6 +24,8 @@ $(document).on("click", "#submit_btn_xuatbaocao", function () {
         alert("Mã khách hàng không hợp lệ!");
         return;
     }
+    if(parseInt($("#from_date_year_xuatbaocao").val()) > parseInt($("#to_date_year_xuatbaocao").val())) {alert("Năm từ lớn hơn năm đến");return;}
+    if(parseInt($("#from_date_month_xuatbaocao").val()) > parseInt($("#to_date_month_xuatbaocao").val())) {alert("Tháng từ lớn hơn tháng đến"); return;}
     if($("#from_date_month_xuatbaocao").val() == "..." || $("#from_date_year_xuatbaocao").val() == "..." || $("#to_date_month_xuatbaocao").val() == "..." || $("#to_date_year_xuatbaocao").val() == "..."){
         alert("Ngày tháng không hợp lệ!");
         return;
