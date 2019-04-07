@@ -17,7 +17,7 @@ $(document).on("click", "#submit_btn_theodoidanhsach", function () {
 });
 $(document).on("click", "#submit_btn_xuatbaocao", function () {
     var customer_code = $('#customer_code_xuatbaocao').val();
-    var customer_code_pattern = new RegExp("^[a-zA-Z]{2}[0-9]{4}$");
+    var customer_code_pattern = new RegExp("^[0-9]+$^[a-zA-Z]{2}[0-9]{4}$");
     var res = customer_code_pattern.test(customer_code);
     console.log(res);
     if( res == false) {
@@ -78,6 +78,39 @@ $(document).on("click", ".btn_in_setting_popup", function () {
 })
 $(document).on("click", "#btn_save_setting", function () {
     console.log("#btn_save_setting clicked");
+    var positive_number_pattern = new RegExp("^[1-9][0-9]*$")
+    if(!$('#input_min_age_to_participant_VSI').val().match(positive_number_pattern)){
+        alert('Dữ liệu cho "Tuổi tối thiểu tham gia bảo hiểm tự nguyện" phải là một số nguyên dương lớn hơn 0')
+        return;
+    }
+    if(!$('#input_company_CSI_percentage').val().match(positive_number_pattern)){
+        alert('Dữ liệu cho "% lương doanh nghiệp đóng BHBB" phải là một số nguyên dương lớn hơn 0')
+        return;
+    }
+    if(!$('#input_labor_CSI_percentage').val().match(positive_number_pattern)){
+        alert('Dữ liệu cho "% lương người lao động đóng BHBB" phải là một số nguyên dương lớn hơn 0')
+        return;
+    }
+    if(!$('#input_labor_VSI_percentage').val().match(positive_number_pattern)){
+        alert('Dữ liệu cho "% lương người lao động đóng BHTN" phải là một số nguyên dương lớn hơn 0')
+        return;
+    }
+    if(!$('#input_1st_area_min_salary').val().match(positive_number_pattern)){
+        alert('Dữ liệu cho "Mức lương tối thiểu vùng 1" phải là một số nguyên dương lớn hơn 0')
+        return;
+    }
+    if(!$('#input_2nd_area_min_salary').val().match(positive_number_pattern)){
+        alert('Dữ liệu cho "Mức lương tối thiểu vùng 2" phải là một số nguyên dương lớn hơn 0')
+        return;
+    }
+    if(!$('#input_3rd_area_min_salary').val().match(positive_number_pattern)){
+        alert('Dữ liệu cho "Mức lương tối thiểu vùng 3" phải là một số nguyên dương lớn hơn 0')
+        return;
+    }
+    if(!$('#input_4th_area_min_salary').val().match(positive_number_pattern)){
+        alert('Dữ liệu cho "Mức lương tối thiểu vùng 4" phải là một số nguyên dương lớn hơn 0')
+        return;
+    }
     var payload = {'command': 'create_new_rule', 'min_age_to_participant_VSI': $('#input_min_age_to_participant_VSI').val(), 'company_CSI_percentage': $('#input_company_CSI_percentage').val(), 'labor_CSI_percentage': $('#input_labor_CSI_percentage').val(), 'labor_VSI_percentage': $('#input_labor_VSI_percentage').val(), '1st_area_min_salary': $('#input_1st_area_min_salary').val(), '2nd_area_min_salary': $('#input_2nd_area_min_salary').val(), '3rd_area_min_salary': $('#input_3rd_area_min_salary').val(), '4th_area_min_salary': $('#input_4th_area_min_salary').val()}
     console.log(payload)
     $.post(url = "Controller", payload, function (result) {
