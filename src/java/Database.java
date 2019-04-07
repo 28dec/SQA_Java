@@ -338,4 +338,20 @@ public class Database {
         }
         return result;
     }
+    public String search_customer_by_code(String code){
+        String result = null;
+        try {
+            CallableStatement stmt = conn.prepareCall("call search_customer_by_code(?)");
+            stmt.setString(1, code);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                result = rs.getString("full_name");
+            } else {
+                result = "NO RESULT!";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }

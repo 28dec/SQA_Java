@@ -1,5 +1,7 @@
 $(document).on("click", "#submit_btn_theodoidanhsach", function () {
     console.log("button submit clicked");
+    if(parseInt($("#from_date_year_theodoidanhsach").val()) > parseInt($("#to_date_year_theodoidanhsach").val())) {alert("Năm từ lớn hơn năm đến");return;}
+    if(parseInt($("#from_date_month_theodoidanhsach").val()) > parseInt($("#to_date_month_theodoidanhsach").val())) {alert("Tháng từ lớn hơn tháng đến"); return;}
     if($("#from_date_month_theodoidanhsach").val() == "..." || $("#from_date_year_theodoidanhsach").val() == "..." || $("#to_date_month_theodoidanhsach").val() == "..." || $("#to_date_year_theodoidanhsach").val() == "..."){
         alert("Ngày tháng không hợp lệ!");
         return;
@@ -107,6 +109,14 @@ $(document).on("keyup", "#customer_name_xuatbaocao", function(){
         for (var i = json.length - 1; i >= 0; i--) {
             $("#customers_sel").append("<option value = '" + json[i]['customer_code'] + "'>" + json[i]['customer_name'] + "(" + json[i]['customer_id'] + " - " + json[i]['customer_dob'] + ")</option>");
         }
+    })
+})
+
+$(document).on("keyup", "#customer_code_xuatbaocao", function(){
+    var payload_0027 = {'command':'search_customer_by_code', 'code':$("#customer_code_xuatbaocao").val()}
+    console.log(payload_0027);
+    $.post(url = "Controller", payload_0027, function(result){
+        $("#customer_name_xuatbaocao").val(result);
     })
 })
 
