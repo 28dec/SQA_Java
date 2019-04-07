@@ -145,7 +145,16 @@
                     
                 </div>
                 <div class="modal-body">
+                    <select id="search_type_sel">
+                    	<option>...</option>
+                    	<option value="by_name">Tìm theo tên khách hàng</option>
+                    	<option value="by_code">Tìm theo mã khách hàng</option>
+                    </select>
+                    <br>
                     Mã khách hàng: <input type="text" name="customer_code" id="customer_code_xuatbaocao"><br>
+                    Tên khách hàng: <input type="text" name="customer_code" id="customer_name_xuatbaocao"><br>
+                    <select id="customers_sel"></select>
+                    <br>
                     Từ <select id="from_date_month_xuatbaocao">
                         <option value="...">...</option>
                         <option value="01">1</option>

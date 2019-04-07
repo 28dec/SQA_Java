@@ -80,3 +80,42 @@ $(document).on("click", "#btn_save_setting", function () {
         alert(result)
     })
 })
+
+$(document).on("change", "#search_type_sel", function(){
+    if($(this).val() == "by_name"){
+        $("#customer_name_xuatbaocao").prop('disabled', false);
+        $("#customer_code_xuatbaocao").prop('disabled', true);
+        $("#customers_sel").prop('disabled', false);
+        $("#customer_code_xuatbaocao").val("");
+    } else if ($(this).val() == "by_code") {
+        $("#customer_code_xuatbaocao").prop('disabled', false);
+        $("#customer_name_xuatbaocao").prop('disabled', true);
+        $("#customers_sel").prop('disabled', true);
+        $("#customer_name_xuatbaocao").val("");
+    }
+})
+
+$(document).on("keyup", "#customer_name_xuatbaocao", function(){
+    var payload_2332 = {'command':'search_customer_by_name', 'name':$("#customer_name_xuatbaocao").val()}
+    console.log(payload_2332);
+    $("#customers_sel").empty();
+    $.post(url = "Controller", payload_2332, function(result){
+        console.log(result);
+        json = JSON.parse(result);
+        if(json.length > 0) $("#customers_sel").append("<option>FOUND!</option>");
+        else $("#customers_sel").append("<option>NO RESULT!</option>");
+        for (var i = json.length - 1; i >= 0; i--) {
+            $("#customers_sel").append("<option value = '" + json[i]['customer_code'] + "'>" + json[i]['customer_name'] + "(" + json[i]['customer_id'] + " - " + json[i]['customer_dob'] + ")</option>");
+        }
+    })
+})
+
+$(document).on("change", "#customers_sel", function(){
+    $("#customer_code_xuatbaocao").val($(this).val());
+})
+
+$(document).on("click", "#btn_xuatbaocao", function(){
+    $("#customer_name_xuatbaocao").prop('disabled', true)
+    $("#customer_code_xuatbaocao").prop('disabled', true)
+    $("#customers_sel").prop('disabled', true)
+})
