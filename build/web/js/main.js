@@ -21,7 +21,7 @@ $(document).on("click", "#submit_btn_xuatbaocao", function () {
     var res = customer_code_pattern.test(customer_code);
     console.log(res);
     if( res == false) {
-        alert("Mã khách hàng không hợp lệ!");
+        alert("Mã khách hàng [" + customer_code + "] không hợp lệ!");
         return;
     }
     if(parseInt($("#from_date_year_xuatbaocao").val()) > parseInt($("#to_date_year_xuatbaocao").val())) {alert("Năm từ lớn hơn năm đến");return;}
@@ -124,11 +124,15 @@ $(document).on("change", "#search_type_sel", function(){
         $("#customer_code_xuatbaocao").prop('disabled', true);
         $("#customers_sel").prop('disabled', false);
         $("#customer_code_xuatbaocao").val("");
+        $("#customer_name_xuatbaocao").val("");
+        $("#customers_sel").empty();
     } else if ($(this).val() == "by_code") {
         $("#customer_code_xuatbaocao").prop('disabled', false);
         $("#customer_name_xuatbaocao").prop('disabled', true);
         $("#customers_sel").prop('disabled', true);
+        $("#customer_code_xuatbaocao").val("");
         $("#customer_name_xuatbaocao").val("");
+        $("#customers_sel").empty();
     }
 })
 
