@@ -17,7 +17,7 @@ $(document).on("click", "#submit_btn_theodoidanhsach", function () {
 });
 $(document).on("click", "#submit_btn_xuatbaocao", function () {
     var customer_code = $('#customer_code_xuatbaocao').val();
-    var customer_code_pattern = new RegExp("^[0-9]+$^[a-zA-Z]{2}[0-9]{4}$");
+    var customer_code_pattern = new RegExp("^[a-zA-Z]{2}[0-9]{4}$");
     var res = customer_code_pattern.test(customer_code);
     console.log(res);
     if( res == false) {
