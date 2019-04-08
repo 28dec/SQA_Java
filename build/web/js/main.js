@@ -1,7 +1,7 @@
 $(document).on("click", "#submit_btn_theodoidanhsach", function () {
     console.log("button submit clicked");
     if(parseInt($("#from_date_year_theodoidanhsach").val()) > parseInt($("#to_date_year_theodoidanhsach").val())) {alert("Năm từ lớn hơn năm đến");return;}
-    if(parseInt($("#from_date_month_theodoidanhsach").val()) > parseInt($("#to_date_month_theodoidanhsach").val())) {alert("Tháng từ lớn hơn tháng đến"); return;}
+    if(parseInt($("#from_date_month_theodoidanhsach").val()) > parseInt($("#to_date_month_theodoidanhsach").val()) && parseInt($("#from_date_year_theodoidanhsach").val()) == parseInt($("#to_date_year_theodoidanhsach").val())) {alert("Tháng từ lớn hơn tháng đến"); return;}
     if($("#from_date_month_theodoidanhsach").val() == "..." || $("#from_date_year_theodoidanhsach").val() == "..." || $("#to_date_month_theodoidanhsach").val() == "..." || $("#to_date_year_theodoidanhsach").val() == "..."){
         alert("Ngày tháng không hợp lệ!");
         return;
@@ -21,11 +21,11 @@ $(document).on("click", "#submit_btn_xuatbaocao", function () {
     var res = customer_code_pattern.test(customer_code);
     console.log(res);
     if( res == false) {
-        alert("Mã khách hàng [" + customer_code + "] không hợp lệ!");
+        alert("Mã khách hàng [" + customer_code + "] không hợp lệ! Một mã khách hàng hợp lệ là mã có độ dài bằng 6, 2 ký tự đầu tiên là chữ cái, 4 ký tự tiếp theo là chữ số!");
         return;
     }
     if(parseInt($("#from_date_year_xuatbaocao").val()) > parseInt($("#to_date_year_xuatbaocao").val())) {alert("Năm từ lớn hơn năm đến");return;}
-    if(parseInt($("#from_date_month_xuatbaocao").val()) > parseInt($("#to_date_month_xuatbaocao").val())) {alert("Tháng từ lớn hơn tháng đến"); return;}
+    if(parseInt($("#from_date_month_xuatbaocao").val()) > parseInt($("#to_date_month_xuatbaocao").val()) && parseInt($("#from_date_year_xuatbaocao").val()) == parseInt($("#to_date_year_xuatbaocao").val())) {alert("Tháng từ lớn hơn tháng đến"); return;}
     if($("#from_date_month_xuatbaocao").val() == "..." || $("#from_date_year_xuatbaocao").val() == "..." || $("#to_date_month_xuatbaocao").val() == "..." || $("#to_date_year_xuatbaocao").val() == "..."){
         alert("Ngày tháng không hợp lệ!");
         return;
@@ -65,11 +65,11 @@ $(document).on("click", "#btn_cauhinh", function () {
 )
 $(document).on("click", ".btn_in_setting_popup", function () {
     console.log($(this).val() + " clicked!")
-    if ($(this).html() == 'EDIT') {
-        $(this).html('DONE')
+    if ($(this).html() == 'SỬA') {
+        $(this).html('XONG')
         $('#' + $(this).val()).prop('disabled', false)
-    } else if ($(this).html() == 'DONE') {
-        $(this).html('EDIT')
+    } else if ($(this).html() == 'XONG') {
+        $(this).html('SỬA')
         $("#btn_save_setting").prop('disabled', false)
         $('#' + $(this).val()).prop('disabled', true)
     } else {
@@ -143,8 +143,8 @@ $(document).on("keyup", "#customer_name_xuatbaocao", function(){
     $.post(url = "Controller", payload_2332, function(result){
         console.log(result);
         json = JSON.parse(result);
-        if(json.length > 0) $("#customers_sel").append("<option>FOUND!</option>");
-        else $("#customers_sel").append("<option>NO RESULT!</option>");
+        if(json.length > 0) $("#customers_sel").append("<option>ĐÃ TÌM THẤY!</option>");
+        else $("#customers_sel").append("<option>KHÔNG CÓ KẾT QUẢ!</option>");
         for (var i = json.length - 1; i >= 0; i--) {
             $("#customers_sel").append("<option value = '" + json[i]['customer_code'] + "'>" + json[i]['customer_name'] + "(" + json[i]['customer_id'] + " - " + json[i]['customer_dob'] + ")</option>");
         }
@@ -167,4 +167,8 @@ $(document).on("click", "#btn_xuatbaocao", function(){
     $("#customer_name_xuatbaocao").prop('disabled', true)
     $("#customer_code_xuatbaocao").prop('disabled', true)
     $("#customers_sel").prop('disabled', true)
+    $("#customer_name_xuatbaocao").val("")
+    $("#customer_code_xuatbaocao").val("")
+    $("#customers_sel").val("")
+    $("#search_type_sel").val("...")
 })
