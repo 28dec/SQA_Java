@@ -9,7 +9,7 @@
 <html>
 <!-- <?php date_default_timezone_set('Asia/Ho_Chi_Minh'); ?> -->
 <head>
-    <title>He thong Bao hiem Xa hoi</title>
+    <title>Hệ thống Bảo hiểm Xã hội</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

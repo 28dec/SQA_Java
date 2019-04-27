@@ -2,8 +2,14 @@ $(document).on("click", "#submit_btn_theodoidanhsach", function () {
     console.log("button submit clicked");
     if(parseInt($("#from_date_year_theodoidanhsach").val()) > parseInt($("#to_date_year_theodoidanhsach").val())) {alert("Năm từ lớn hơn năm đến");return;}
     if(parseInt($("#from_date_month_theodoidanhsach").val()) > parseInt($("#to_date_month_theodoidanhsach").val()) && parseInt($("#from_date_year_theodoidanhsach").val()) == parseInt($("#to_date_year_theodoidanhsach").val())) {alert("Tháng từ lớn hơn tháng đến"); return;}
+    
+    if($("#from_date_month_theodoidanhsach").val() == "..." && $("#from_date_year_theodoidanhsach").val() == "..." && $("#to_date_month_theodoidanhsach").val() == "..." && $("#to_date_year_theodoidanhsach").val() == "..."){
+        alert("Bạn chưa chọn trường thời gian!");
+        return;
+    }
+
     if($("#from_date_month_theodoidanhsach").val() == "..." || $("#from_date_year_theodoidanhsach").val() == "..." || $("#to_date_month_theodoidanhsach").val() == "..." || $("#to_date_year_theodoidanhsach").val() == "..."){
-        alert("Ngày tháng không hợp lệ!");
+        alert("Bạn chưa chọn đủ trường thời gian!");
         return;
     }
     var payload_voluntary = {'command': 'system_report', 'type': 'voluntary', 'from_date': $("#from_date_month_theodoidanhsach").val() + "/" + $("#from_date_year_theodoidanhsach").val(), 'to_date': $("#to_date_month_theodoidanhsach").val() + "/" + $("#to_date_year_theodoidanhsach").val()};
@@ -16,8 +22,28 @@ $(document).on("click", "#submit_btn_theodoidanhsach", function () {
     $('#result_theodoidanhsach').show();
 });
 $(document).on("click", "#submit_btn_xuatbaocao", function () {
+    if($("#search_type_sel").val() == '...'){
+        alert("Bạn chưa chọn phương thức tìm kiếm khách hàng!")
+        return;
+    }
+    if($("#search_type_sel").val() == "by_name" && $("#customer_name_xuatbaocao").val() ==""){
+        alert("Bạn chưa nhập tên khách hàng!")
+        return;
+    }
+
+    if($("#search_type_sel").val() == "by_name" && $("#customer_name_xuatbaocao").val() !="" && $("#customer_code_xuatbaocao").val() ==""){
+        alert("Bạn đã nhập tên khách hàng nhưng chưa chọn đích danh khách hàng!")
+        return;
+    }
+    if($("#search_type_sel").val() == "by_code" && $("#customer_code_xuatbaocao").val() == ""){
+        alert("Bạn chưa nhập mã khách hàng!")
+        return;
+    }
     var customer_code = $('#customer_code_xuatbaocao').val();
-    var customer_code_pattern = new RegExp("^[a-zA-Z]{2}[0-9]{4}$");
+    if(customer_code == ""){
+        alert("Bạn chưa nhập mã khách hàng");
+        return;
+    }    var customer_code_pattern = new RegExp("^[a-zA-Z]{2}[0-9]{4}$");
     var res = customer_code_pattern.test(customer_code);
     console.log(res);
     if( res == false) {
@@ -26,8 +52,12 @@ $(document).on("click", "#submit_btn_xuatbaocao", function () {
     }
     if(parseInt($("#from_date_year_xuatbaocao").val()) > parseInt($("#to_date_year_xuatbaocao").val())) {alert("Năm từ lớn hơn năm đến");return;}
     if(parseInt($("#from_date_month_xuatbaocao").val()) > parseInt($("#to_date_month_xuatbaocao").val()) && parseInt($("#from_date_year_xuatbaocao").val()) == parseInt($("#to_date_year_xuatbaocao").val())) {alert("Tháng từ lớn hơn tháng đến"); return;}
+    if($("#from_date_month_xuatbaocao").val() == "..." && $("#from_date_year_xuatbaocao").val() == "..." && $("#to_date_month_xuatbaocao").val() == "..." && $("#to_date_year_xuatbaocao").val() == "..."){
+        alert("Bạn chưa chọn trường thời gian!");
+        return;
+    }
     if($("#from_date_month_xuatbaocao").val() == "..." || $("#from_date_year_xuatbaocao").val() == "..." || $("#to_date_month_xuatbaocao").val() == "..." || $("#to_date_year_xuatbaocao").val() == "..."){
-        alert("Ngày tháng không hợp lệ!");
+        alert("Bạn chưa chọn đủ trường thời gian!");
         return;
     }
     var payload_person = {'command': 'xuatbaocao_person', 'customer_code': customer_code, 'from_date': $("#from_date_month_xuatbaocao").val() + "/" + $("#from_date_year_xuatbaocao").val(), 'to_date': $("#to_date_month_xuatbaocao").val() + "/" + $("#to_date_year_xuatbaocao").val()}

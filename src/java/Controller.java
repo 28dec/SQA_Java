@@ -217,7 +217,7 @@ public class Controller extends HttpServlet {
                     out.print("<th>Tên khách hàng</th>");
                     out.print("<th>Giới tính</th>");
                     out.print("<th>Loại bảo hiểm</th>");
-                    out.print("<th>Pay date</th>");
+                    out.print("<th>Thời gian bảo hiểm</th>");
                     out.print("<th>Số tiền</th>");
                     out.print("</thead>");
                     out.print("<tbody>");
@@ -226,8 +226,14 @@ public class Controller extends HttpServlet {
                         out.print("<td>" + (i + 1) + "</td>");
 			out.print("<td>" + result.getJSONObject(i).getString("customer_code") + "</td>");
 			out.print("<td>" + result.getJSONObject(i).getString("full_name") + "</td>");
-			out.print("<td>" + result.getJSONObject(i).getString("gender") + "</td>");
-			out.print("<td>" + result.getJSONObject(i).getString("type_of_insurance") + "</td>");
+                        String gender = "";
+                        if(result.getJSONObject(i).getString("gender").equals("MALE")) gender = "NAM";
+                        else if(result.getJSONObject(i).getString("gender").equals("FEMALE")) gender = "NỮ";
+			out.print("<td>" + gender + "</td>");
+                        String type_of_insurance = "";
+                        if(result.getJSONObject(i).getString("type_of_insurance").equals("COMPULSORY")) type_of_insurance = "BẮT BUỘC";
+                        else if(result.getJSONObject(i).getString("type_of_insurance").equals("VOLUNTARY")) type_of_insurance = "TỰ NGUYỆN";
+			out.print("<td>" + type_of_insurance + "</td>");
 			out.print("<td>" + result.getJSONObject(i).getString("pay_date") + "</td>");
 			out.print("<td>" + result.getJSONObject(i).getString("money") + "</td>");
                         out.print("</tr>");
