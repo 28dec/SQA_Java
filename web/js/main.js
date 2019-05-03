@@ -159,7 +159,7 @@ $(document).on("change", "#search_type_sel", function(){
     } else if ($(this).val() == "by_code") {
         $("#customer_code_xuatbaocao").prop('disabled', false);
         $("#customer_name_xuatbaocao").prop('disabled', true);
-        $("#customers_sel").prop('disabled', true);
+        $("#customers_sel").prop('disabled', false);
         $("#customer_code_xuatbaocao").val("");
         $("#customer_name_xuatbaocao").val("");
         $("#customers_sel").empty();
@@ -176,21 +176,29 @@ $(document).on("keyup", "#customer_name_xuatbaocao", function(){
         if(json.length > 0) $("#customers_sel").append("<option>ĐÃ TÌM THẤY!</option>");
         else $("#customers_sel").append("<option>KHÔNG CÓ KẾT QUẢ!</option>");
         for (var i = json.length - 1; i >= 0; i--) {
-            $("#customers_sel").append("<option value = '" + json[i]['customer_code'] + "'>" + json[i]['customer_name'] + "(" + json[i]['customer_id'] + " - " + json[i]['customer_dob'] + ")</option>");
+            $("#customers_sel").append("<option value = '" + json[i]['customer_code'] + "|" + json[i]['customer_name']+ "'>" + json[i]['customer_name'] + "(" + json[i]['customer_id'] + " - " + json[i]['customer_dob'] + ")</option>");
         }
     })
 })
 
 $(document).on("keyup", "#customer_code_xuatbaocao", function(){
-    var payload_0027 = {'command':'search_customer_by_code', 'code':$("#customer_code_xuatbaocao").val()}
+    var payload_0027 = {'command':'search_customer_by_code_0', 'code':$("#customer_code_xuatbaocao").val()}
     console.log(payload_0027);
+    $("#customers_sel").empty();
     $.post(url = "Controller", payload_0027, function(result){
-        $("#customer_name_xuatbaocao").val(result);
+        console.log(result);
+        json = JSON.parse(result);
+        if(json.length > 0) $("#customers_sel").append("<option>ĐÃ TÌM THẤY!</option>");
+        else $("#customers_sel").append("<option>KHÔNG CÓ KẾT QUẢ!</option>");
+        for (var i = json.length - 1; i >= 0; i--) {
+            $("#customers_sel").append("<option value = '" + json[i]['customer_code'] + "|" + json[i]['customer_name'] + "'>" + json[i]['customer_name'] + "(" + json[i]['customer_id'] + " - " + json[i]['customer_dob'] + ")</option>");
+        }
     })
 })
 
 $(document).on("change", "#customers_sel", function(){
-    $("#customer_code_xuatbaocao").val($(this).val());
+    $("#customer_code_xuatbaocao").val($(this).val().split('|')[0]);
+    $("#customer_name_xuatbaocao").val($(this).val().split('|')[1]);
 })
 
 $(document).on("click", "#btn_xuatbaocao", function(){

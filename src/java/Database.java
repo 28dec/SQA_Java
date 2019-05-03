@@ -338,6 +338,27 @@ public class Database {
         }
         return result;
     }
+    
+    public JSONArray search_customer_by_code0(String code){
+        JSONArray result = new JSONArray();
+        try {
+            CallableStatement stmt = conn.prepareCall("call search_customer_by_code0(?)");
+            stmt.setString(1, code);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                JSONObject j = new JSONObject();
+                j.put("customer_code", rs.getString("code"));
+                j.put("customer_name", rs.getString("full_name"));
+                j.put("customer_dob", rs.getString("date_of_birth"));
+                j.put("customer_id", rs.getString("id"));
+                result.put(j);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
     public String search_customer_by_code(String code){
         String result = null;
         try {

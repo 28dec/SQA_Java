@@ -21,10 +21,10 @@
     <div class="container border my-5">
         <div class="row my-2 py-2 text-center">
             <div class="col-4">
-                <button id="btn_theodoidanhsach" data-toggle="modal" data-target="#popup_theodoidanhsach">THEO DÕI DANH SÁCH</button>
+                <button id="btn_theodoidanhsach" data-toggle="modal" data-target="#popup_theodoidanhsach">XUẤT BÁO CÁO</button>
             </div>
             <div class="col-4">
-                <button id="btn_xuatbaocao" data-toggle="modal" data-target="#popup_xuatbaocao">XUẤT BÁO CÁO</button>
+                <button id="btn_xuatbaocao" data-toggle="modal" data-target="#popup_xuatbaocao">THEO DÕI DANH SÁCH</button>
             </div>
             <div class="col-4">
                 <button id="btn_cauhinh" data-toggle="modal" data-target="#popup_cauhinh">CẤU HÌNH</button>

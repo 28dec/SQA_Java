@@ -249,6 +249,10 @@ public class Controller extends HttpServlet {
                     String result_0030 = db.search_customer_by_code(req.getParameter("code"));
                     out.print(result_0030);
                     break;
+                case "search_customer_by_code_0":
+                    JSONArray result_1045 = db.search_customer_by_code0(req.getParameter("code"));
+                    out.print(result_1045.toString());
+                    break;
                 default:
                     out.println("UNKNOWN INPUT COMMAND -> " + cmd);
             }
