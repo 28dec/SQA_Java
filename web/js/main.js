@@ -95,19 +95,6 @@ $(document).on("click", "#btn_cauhinh", function () {
 )
 $(document).on("click", ".btn_in_setting_popup", function () {
     console.log($(this).val() + " clicked!")
-    if ($(this).html() == 'SỬA') {
-        $(this).html('XONG')
-        $('#' + $(this).val()).prop('disabled', false)
-    } else if ($(this).html() == 'XONG') {
-        $(this).html('SỬA')
-        $("#btn_save_setting").prop('disabled', false)
-        $('#' + $(this).val()).prop('disabled', true)
-    } else {
-        alert("Error code 903 occurred!\n please contact admin -> m.me/bachvkhoa")
-    }
-})
-$(document).on("click", "#btn_save_setting", function () {
-    console.log("#btn_save_setting clicked");
     var positive_number_pattern = new RegExp("^[1-9][0-9]*$")
     if(!$('#input_min_age_to_participant_VSI').val().match(positive_number_pattern)){
         alert('Dữ liệu cho "Tuổi tối thiểu tham gia bảo hiểm tự nguyện" phải là một số nguyên dương lớn hơn 0')
@@ -141,6 +128,24 @@ $(document).on("click", "#btn_save_setting", function () {
         alert('Dữ liệu cho "Mức lương tối thiểu vùng 4" phải là một số nguyên dương lớn hơn 0')
         return;
     }
+    if ($(this).html() == 'SỬA') {
+        $(this).html('XONG')
+        $('#' + $(this).val()).prop('disabled', false)
+    } else if ($(this).html() == 'XONG') {
+        $(this).html('SỬA')
+        $("#btn_save_setting").prop('disabled', false)
+        $('#' + $(this).val()).prop('disabled', true)
+    } else {
+        alert("Error code 903 occurred!\n please contact admin -> m.me/bachvkhoa")
+    }
+})
+$(document).on("click", ".btn_in_setting_popup", function () {
+    console.log("#btn_save_setting clicked");
+    
+    
+})
+
+$(document).on("click", "#btn_save_setting", function(){
     var payload = {'command': 'create_new_rule', 'min_age_to_participant_VSI': $('#input_min_age_to_participant_VSI').val(), 'company_CSI_percentage': $('#input_company_CSI_percentage').val(), 'labor_CSI_percentage': $('#input_labor_CSI_percentage').val(), 'labor_VSI_percentage': $('#input_labor_VSI_percentage').val(), '1st_area_min_salary': $('#input_1st_area_min_salary').val(), '2nd_area_min_salary': $('#input_2nd_area_min_salary').val(), '3rd_area_min_salary': $('#input_3rd_area_min_salary').val(), '4th_area_min_salary': $('#input_4th_area_min_salary').val()}
     console.log(payload)
     $.post(url = "Controller", payload, function (result) {
