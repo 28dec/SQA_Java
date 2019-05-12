@@ -94,55 +94,56 @@ $(document).on("click", "#btn_cauhinh", function () {
 }
 )
 $(document).on("click", ".btn_in_setting_popup", function () {
-    console.log($(this).val() + " clicked!")
-    var positive_number_pattern = new RegExp("^[1-9][0-9]*$")
-    if(!$('#input_min_age_to_participant_VSI').val().match(positive_number_pattern)){
-        alert('Dữ liệu cho "Tuổi tối thiểu tham gia bảo hiểm tự nguyện" phải là một số nguyên dương lớn hơn 0')
-        return;
+    console.log("main.js 2018")
+    console.log($(this).html())
+    if($(this).html() == 'XONG'){
+        console.log($(this).val() + " clicked!")
+        var positive_number_pattern = new RegExp("^[1-9][0-9]*$")
+        var float_number_between_0_100_pattern = new RegExp("^[0-9]{1,2}\.[0-9]+");
+        if(!$('#input_min_age_to_participant_VSI').val().match(positive_number_pattern)){
+            alert('Dữ liệu cho "Tuổi tối thiểu tham gia bảo hiểm tự nguyện" phải là một số nguyên dương lớn hơn 0')
+            return;
+        }
+        if(!$('#input_company_CSI_percentage').val().match(float_number_between_0_100_pattern)){
+            alert('Dữ liệu cho "% lương doanh nghiệp đóng BHBB" phải là một số thực lớn hơn 0.0 và nhỏ hơn 100.0 -> ' + $('#input_company_CSI_percentage').val())
+            return;
+        }
+        if(!$('#input_labor_CSI_percentage').val().match(float_number_between_0_100_pattern)){
+            alert('Dữ liệu cho "% lương người lao động đóng BHBB" phải là một số thực lớn hơn 0.0 và nhỏ hơn 100.0')
+            return;
+        }
+        if(!$('#input_labor_VSI_percentage').val().match(float_number_between_0_100_pattern)){
+            alert('Dữ liệu cho "% lương người lao động đóng BHTN" phải là một số thực lớn hơn 0.0 và nhỏ hơn 100.0')
+            return;
+        }
+        if(!$('#input_1st_area_min_salary').val().match(positive_number_pattern)){
+            alert('Dữ liệu cho "Mức lương tối thiểu vùng 1" phải là một số nguyên dương lớn hơn 0')
+            return;
+        }
+        if(!$('#input_2nd_area_min_salary').val().match(positive_number_pattern)){
+            alert('Dữ liệu cho "Mức lương tối thiểu vùng 2" phải là một số nguyên dương lớn hơn 0')
+            return;
+        }
+        if(!$('#input_3rd_area_min_salary').val().match(positive_number_pattern)){
+            alert('Dữ liệu cho "Mức lương tối thiểu vùng 3" phải là một số nguyên dương lớn hơn 0')
+            return;
+        }
+        if(!$('#input_4th_area_min_salary').val().match(positive_number_pattern)){
+            alert('Dữ liệu cho "Mức lương tối thiểu vùng 4" phải là một số nguyên dương lớn hơn 0')
+            return;
+        }
     }
-    if(!$('#input_company_CSI_percentage').val().match(positive_number_pattern)){
-        alert('Dữ liệu cho "% lương doanh nghiệp đóng BHBB" phải là một số nguyên dương lớn hơn 0')
-        return;
-    }
-    if(!$('#input_labor_CSI_percentage').val().match(positive_number_pattern)){
-        alert('Dữ liệu cho "% lương người lao động đóng BHBB" phải là một số nguyên dương lớn hơn 0')
-        return;
-    }
-    if(!$('#input_labor_VSI_percentage').val().match(positive_number_pattern)){
-        alert('Dữ liệu cho "% lương người lao động đóng BHTN" phải là một số nguyên dương lớn hơn 0')
-        return;
-    }
-    if(!$('#input_1st_area_min_salary').val().match(positive_number_pattern)){
-        alert('Dữ liệu cho "Mức lương tối thiểu vùng 1" phải là một số nguyên dương lớn hơn 0')
-        return;
-    }
-    if(!$('#input_2nd_area_min_salary').val().match(positive_number_pattern)){
-        alert('Dữ liệu cho "Mức lương tối thiểu vùng 2" phải là một số nguyên dương lớn hơn 0')
-        return;
-    }
-    if(!$('#input_3rd_area_min_salary').val().match(positive_number_pattern)){
-        alert('Dữ liệu cho "Mức lương tối thiểu vùng 3" phải là một số nguyên dương lớn hơn 0')
-        return;
-    }
-    if(!$('#input_4th_area_min_salary').val().match(positive_number_pattern)){
-        alert('Dữ liệu cho "Mức lương tối thiểu vùng 4" phải là một số nguyên dương lớn hơn 0')
-        return;
-    }
-    if ($(this).html() == 'SỬA') {
-        $(this).html('XONG')
-        $('#' + $(this).val()).prop('disabled', false)
-    } else if ($(this).html() == 'XONG') {
-        $(this).html('SỬA')
-        $("#btn_save_setting").prop('disabled', false)
-        $('#' + $(this).val()).prop('disabled', true)
-    } else {
-        alert("Error code 903 occurred!\n please contact admin -> m.me/bachvkhoa")
-    }
-})
-$(document).on("click", ".btn_in_setting_popup", function () {
-    console.log("#btn_save_setting clicked");
-    
-    
+        if ($(this).html() == 'SỬA') {
+            $(this).html('XONG')
+            $('#' + $(this).val()).prop('disabled', false)
+        } else if ($(this).html() == 'XONG') {
+            $(this).html('SỬA')
+            $("#btn_save_setting").prop('disabled', false)
+            $('#' + $(this).val()).prop('disabled', true)
+        } else {
+            alert("Error code 903 occurred!\n please contact admin -> m.me/bachvkhoa")
+        }
+    console.log("main.js 2019")
 })
 
 $(document).on("click", "#btn_save_setting", function(){

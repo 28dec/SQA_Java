@@ -223,9 +223,9 @@ DROP TABLE IF EXISTS `rule`;
 CREATE TABLE `rule` (
   `rid` int(11) NOT NULL AUTO_INCREMENT,
   `min_age_to_participant_VSI` int(11) DEFAULT NULL,
-  `company_CSI_percentage` int(11) DEFAULT NULL,
-  `labor_CSI_percentage` int(11) DEFAULT NULL,
-  `labor_VSI_percentage` int(11) DEFAULT NULL,
+  `company_CSI_percentage` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `labor_CSI_percentage` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `labor_VSI_percentage` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `1st_area_min_salary` int(11) DEFAULT NULL,
   `2nd_area_min_salary` int(11) DEFAULT NULL,
   `3rd_area_min_salary` int(11) DEFAULT NULL,
@@ -233,7 +233,7 @@ CREATE TABLE `rule` (
   `is_deleted` int(11) DEFAULT '0',
   `created_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`rid`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,7 +242,7 @@ CREATE TABLE `rule` (
 
 LOCK TABLES `rule` WRITE;
 /*!40000 ALTER TABLE `rule` DISABLE KEYS */;
-INSERT INTO `rule` VALUES (1,15,17,10,8,4700000,4500000,4100000,3700000,0,'2019-03-15 20:39:01'),(2,16,17,10,8,4700000,4500000,4100000,3700000,0,'2019-03-21 09:05:48'),(15,15,17,10,8,4700000,4500000,4100000,3700000,0,'2019-03-21 09:41:18'),(16,0,17,10,8,4700000,4500000,4100000,3700000,0,'2019-04-07 17:58:46'),(17,15,17,10,8,4700000,4500000,4100000,3700000,0,'2019-04-07 18:01:27');
+INSERT INTO `rule` VALUES (1,15,'17','10','8',4700000,4500000,4100000,3700000,0,'2019-03-15 20:39:01'),(2,16,'17','10','8',4700000,4500000,4100000,3700000,0,'2019-03-21 09:05:48'),(15,15,'17','10','8',4700000,4500000,4100000,3700000,0,'2019-03-21 09:41:18'),(16,0,'17','10','8',4700000,4500000,4100000,3700000,0,'2019-04-07 17:58:46'),(17,15,'17','10','8',4700000,4500000,4100000,3700000,0,'2019-04-07 18:01:27'),(18,15,'17','10','8',4700000,4500000,4100000,3700000,0,'2019-05-03 04:10:41'),(19,99,'17','10','8',4700000,4500000,4100000,3700000,0,'2019-05-03 04:18:12'),(20,15,'17','10','8',4700000,4500000,4100000,3700000,0,'2019-05-03 16:31:52'),(21,15,'17','10','8',4700000,4500000,4100000,3700000,0,'2019-05-05 11:13:11'),(22,15,'17','10','8',4700000,4500000,4100000,3700000,0,'2019-05-12 13:23:13'),(23,15,'17','10','8',4700000,4500000,4100000,3700000,0,'2019-05-12 13:26:37'),(24,15,'17','10','8',4700000,4500000,4100000,3700000,0,'2019-05-12 13:28:00'),(25,15,'17','10','8',4700000,4500000,4100000,3700000,0,'2019-05-12 13:28:49'),(26,15,'17','10','8',4700000,4500000,4100000,3700000,0,'2019-05-12 13:29:24'),(27,15,'17.0','10.0','8.0',4700000,4500000,4100000,3700000,0,'2019-05-12 13:30:38'),(28,15,'17.5','10.0','8.0',4700000,4500000,4100000,3700000,0,'2019-05-12 13:30:57');
 /*!40000 ALTER TABLE `rule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -347,9 +347,9 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `create_new_rule`(in _min_age_to_participant_VSI int
-							 ,in _company_CSI_percentage int
-                             ,in _labor_CSI_percentage int
-                             ,in _labor_VSI_percentage int
+							 ,in _company_CSI_percentage varchar(50)
+                             ,in _labor_CSI_percentage varchar(50)
+                             ,in _labor_VSI_percentage varchar(50)
                              ,in _1st_area_min_salary int
                              ,in _2nd_area_min_salary int
                              ,in _3rd_area_min_salary int
@@ -805,4 +805,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-03 11:03:20
+-- Dump completed on 2019-05-12 20:31:38
