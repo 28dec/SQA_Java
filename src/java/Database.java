@@ -248,7 +248,7 @@ public class Database {
         return result;
     }
 
-    public Object get_total_compulsory_paid_money(String from_date, String to_date) {
+    public String get_total_compulsory_paid_money(String from_date, String to_date) {
         String result = null;
         try {
             CallableStatement stmt = conn.prepareCall("call get_total_compulsory_paid_money(?, ?)");
